@@ -1,8 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Discord;
+using Discord.Commands;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Discord.WebSocket;
+using Rocket_League.Services;
 
 namespace Rocket_League{
 
