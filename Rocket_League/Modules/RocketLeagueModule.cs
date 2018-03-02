@@ -14,8 +14,6 @@ namespace Rocket_League.Modules
   
     public class RocketLeagueModule : ModuleBase
     {
-      
-
         [Command("rl")] //how to actually call the bot to do something
         [Remarks("")]
         public async Task singlePlayerStats([Remainder] string RlUsernameInputtedByUser)
@@ -26,12 +24,10 @@ namespace Rocket_League.Modules
                 Description = "\n"
 
             };
-
             Services.ConfigurationService RLconfig = new Services.ConfigurationService();
             var apiKey = RLconfig.GetRLapiKey();
 
             var client = new RLSClient(apiKey);
-
             // Retrieve a single player.
             var player = await client.GetPlayerAsync(RlsPlatform.Ps4, RlUsernameInputtedByUser);
             var playerSeasonSix = player.RankedSeasons.FirstOrDefault(x => x.Key == RlsSeason.Six);
@@ -44,13 +40,16 @@ namespace Rocket_League.Modules
                 {
                     builder.Description = builder.Description + "\n" + $"{playerRank.Key}: {playerRank.Value.RankPoints} rating";
                 }
-            }        
-
-           
+            }          
             
             await ReplyAsync("", false,builder.Build());
         }
 
+        [Command("rl2")] //how to actually call the bot to do something
+        [Remarks("")]
+        public async Task singlePlayerStats([Remainder] string RlUsernameInputtedByUser)
+        {
+        }
+                
     }
-    
 }
