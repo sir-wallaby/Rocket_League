@@ -33,20 +33,16 @@ namespace Rocket_League.Modules
 
             // Retrieve a single player on PS4
             var player = await client.GetPlayerAsync(RlsPlatform.Ps4, RlUsernameInputtedByUser);
+            var tier = await client.GetTiersAsync(RlsSeason.Seven);
             var playerSeasonSeven = player.RankedSeasons.FirstOrDefault(x => x.Key == RlsSeason.Seven);
 
             if (playerSeasonSeven.Value != null)
             {
-                builder.Description = builder.Description + "\n" + $"Display Name: {player.DisplayName}";
-
-                foreach (var playerRank in playerSeasonSeven.Value)
-                {
-                    builder.Description = builder.Description + "\n" + $"{playerRank.Key}: {playerRank.Value.RankPoints} rating";
-                }
-
+                builder.Description = builder.Description + "\n" + $"Display Name: {player.DisplayName}";              
                 builder.Description = builder.Description + "\n" + "Platform: " + player.Platform.Name;
                 builder.Description = builder.Description + "\n" + "wins: " + player.Stats.Wins;
-                
+                //builder.Description = builder.Description + "\n" + "tier: " + tier[0];
+
             }          
             
             await ReplyAsync("", false,builder.Build());
